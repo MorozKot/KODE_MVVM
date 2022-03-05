@@ -17,5 +17,4 @@ interface ApiInterface {
 
     @GET("users")
     fun getUsers(): Call<UsersListApiModel>
-
 }

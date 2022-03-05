@@ -6,4 +6,4 @@ package android.kode.data.models
 
 data class UsersListApiModel(
     val items: List<UsersApiModel>
-    )
+)
