@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">KODE_MVVM</string>
+
+    <string name="favorites">Все</string>
+    <string name="design">Designers</string>
+    <string name="analytics">Analysts</string>
+    <string name="management">Managers</string>
+    <string name="ios">IOS</string>
+    <string name="android">Android</string>
+    <string name="qa">QA</string>
+    <string name="back_office">Back office</string>
+    <string name="frontend">Frontend</string>
+    <string name="hr">HR</string>
+    <string name="pr">PR</string>
+    <string name="backend">Backend</string>
+    <string name="support">Support</string>
+    <string name="name_tag_mail">Введи имя, тег, почту…</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancelButton">Отмена</string>
+    <string name="flyingSaucer">Какой-то сверхразум всё сломал</string>
+    <string name="tryQuick">Постараемся быстро починить</string>
+    <string name="tryAgain">Попробовать снова</string>
 </resources>

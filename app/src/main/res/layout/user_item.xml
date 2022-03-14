@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemCard"
+    android:layout_width="match_parent"
+    android:layout_height="80sp"
+    android:checkable="true"
+    android:focusable="true"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/avatarUrlItem"
+            android:layout_width="72sp"
+            android:layout_height="72sp"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="6sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_goose" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nameItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16sp"
+            android:layout_marginTop="22dp"
+            android:textColor="@color/darkText"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/avatarUrlItem"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Алексей Миноградов" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/userTagItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4sp"
+            android:textColor="@color/grayText"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/nameItem"
+            app:layout_constraintStart_toEndOf="@id/nameItem"
+            tools:text="mi" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/departmentItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3sp"
+            android:textColor="@color/grayTextSecondary"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/nameItem"
+            app:layout_constraintTop_toBottomOf="@id/nameItem"
+            tools:text="Analyst" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

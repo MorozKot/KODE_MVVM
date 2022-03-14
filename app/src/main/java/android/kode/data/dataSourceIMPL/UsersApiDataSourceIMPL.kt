@@ -20,7 +20,7 @@ import retrofit2.Response
 class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
     UsersApiDataSource {
 
-    //  private val usersListResponse = MutableLiveData<List<UsersApiModel>>()
+    //private val usersListResponse = MutableLiveData<List<UsersApiModel>>()
 
     override fun startMigration(context: Context) {
 
@@ -37,9 +37,9 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
 
                 usersApiModel?.clear()
 
-                usersApiModel = (response.body()!!.items as ArrayList<UsersApiModel>)!!
+                usersApiModel = response.body()!!.items as ArrayList<UsersApiModel>
 
-                for (audit in usersApiModel) { //запихиваем в локальную БД UsersModel
+                for (audit in usersApiModel) { //запихиваем данные в локальную БД UsersModel
 
                     UsersModel(
                         audit.id,
@@ -57,7 +57,11 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
                         )
                     }
 
-                    Toast.makeText(context, "Секундочку, гружусь...", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        "Секундочку, гружусь...",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
