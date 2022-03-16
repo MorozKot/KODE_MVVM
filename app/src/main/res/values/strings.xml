@@ -21,4 +21,6 @@
     <string name="flyingSaucer">Какой-то сверхразум всё сломал</string>
     <string name="tryQuick">Постараемся быстро починить</string>
     <string name="tryAgain">Попробовать снова</string>
+
+    <string name="empty_space"> </string>
 </resources>

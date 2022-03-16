@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class UsersViewModel (private val usersUseCase: UsersUseCase): ViewModel() {
 
-    val loadCoffee = usersUseCase.loadUsers()
+    val loadUsers = usersUseCase.loadUsers()
 
 
     fun migration(context: Context) = viewModelScope.launch {

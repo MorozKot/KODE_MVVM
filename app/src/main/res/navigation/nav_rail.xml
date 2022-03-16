@@ -9,5 +9,30 @@
         android:id="@+id/homeFragment"
         android:name="android.kode.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_criticalErrorFragment"
+            app:destination="@id/criticalErrorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/criticalErrorFragment"
+        android:name="android.kode.CriticalErrorFragment"
+        android:label="fragment_critical_error"
+        tools:layout="@layout/fragment_critical_error" >
+        <action
+            android:id="@+id/action_criticalErrorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="android.kode.PersonFragment"
+        android:label="fragment_person"
+        tools:layout="@layout/fragment_person" >
+        <action
+            android:id="@+id/action_personFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
