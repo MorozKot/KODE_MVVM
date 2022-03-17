@@ -5,7 +5,6 @@ import android.kode.presentation.di.usersModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import java.util.logging.Level
 
 /**
  *@author Moroz V.A. on 06.03.2022

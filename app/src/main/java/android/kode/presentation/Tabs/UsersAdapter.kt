@@ -6,9 +6,14 @@ import android.kode.data.models.UsersModel
 import android.kode.databinding.UserItemBinding
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  *@author Moroz V.A. on 16.03.2022
@@ -33,14 +38,10 @@ class UsersAdapter() : RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
         holder.bind(users[position])
     }
 
-    fun setList(usersList: List<UsersModel>) {
-        users.clear()
-        users.addAll(usersList)
-    }
+
 
     class UsersHolder(val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n")
         fun bind(usersModel: UsersModel) {
 
             val getImage = binding.avatarUrlItem
@@ -51,7 +52,7 @@ class UsersAdapter() : RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
                 transformations(CircleCropTransformation())
             }
 
-            binding.nameItem.text = usersModel.firstName + R.string.empty_space + usersModel.lastName
+            binding.nameItem.text = usersModel.firstName + " " + usersModel.lastName
             binding.userTagItem.text = usersModel.userTag.lowercase()
             binding.departmentItem.text = usersModel.department
 
@@ -63,4 +64,10 @@ class UsersAdapter() : RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
 
         }
     }
+
+    fun setList(usersList: List<UsersModel>) {
+        users.clear()
+        users.addAll(usersList)
+    }
+
 }

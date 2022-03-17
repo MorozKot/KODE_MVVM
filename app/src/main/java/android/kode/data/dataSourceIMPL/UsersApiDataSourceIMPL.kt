@@ -8,7 +8,6 @@ import android.kode.data.models.UsersApiModel
 import android.kode.data.models.UsersListApiModel
 import android.kode.data.models.UsersModel
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
