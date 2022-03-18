@@ -2,7 +2,6 @@ package android.kode
 
 import android.kode.data.models.UsersModel
 import android.kode.databinding.FragmentHomeBinding
-import android.kode.presentation.Tabs.UsersAdapter
 import android.kode.presentation.Tabs.UsersFilterAdapter
 import android.kode.presentation.viewModels.UsersViewModel
 import android.os.Bundle
@@ -17,11 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private var usersAdapter: UsersAdapter? = null
     private var usersFilterAdapter: UsersFilterAdapter? = null
     private val usersViewModel: UsersViewModel by viewModel()
     private var searchView: SearchView? = null

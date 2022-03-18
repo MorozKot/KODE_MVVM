@@ -11,11 +11,24 @@ class MainActivity : AppCompatActivity() {
     private val usersViewModel: UsersViewModel by viewModel()
     lateinit var binding: ActivityMainBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         usersViewModel.migration(this)
+
+
+            fun errorf(){
+                supportFragmentManager.beginTransaction()
+                    .show(CriticalErrorFragment())
+                    .commit()}
+
+
+
     }
+
+
 }

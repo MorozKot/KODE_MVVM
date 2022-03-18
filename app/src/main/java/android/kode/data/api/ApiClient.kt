@@ -22,7 +22,6 @@ class ApiClient private constructor() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(NetworkModule.httpClient) //таймауты
                 .build()
-
     }
 
     companion object {
@@ -43,7 +42,6 @@ class ApiClient private constructor() {
                 }
 
                 return apiClient
-
             }
     }
 }

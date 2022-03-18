@@ -8,5 +8,4 @@ import android.content.Context
 interface UsersApiDataSource {
 
     fun startMigration(context: Context)
-
 }

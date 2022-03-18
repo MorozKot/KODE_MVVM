@@ -1,6 +1,9 @@
 package android.kode.data.dataSourceIMPL
 
 import android.content.Context
+import android.kode.CriticalErrorFragment
+import android.kode.HomeFragment
+import android.kode.R
 import android.kode.data.api.ApiClient
 import android.kode.data.dataSource.UsersApiDataSource
 import android.kode.data.dataSource.UsersDataSource
@@ -11,6 +14,12 @@ import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+
 
 /**
  *@author Moroz V.A. on 06.03.2022
@@ -18,8 +27,6 @@ import retrofit2.Response
 
 class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
     UsersApiDataSource {
-
-    //private val usersListResponse = MutableLiveData<List<UsersApiModel>>()
 
     override fun startMigration(context: Context) {
 
@@ -29,38 +36,41 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
                 call: Call<UsersListApiModel>,
                 response: Response<UsersListApiModel>
             ) {
-
-                // usersListResponse.value = response.body()!!.items
-
-                var usersApiModel: ArrayList<UsersApiModel>? = null
-
-                usersApiModel?.clear()
-
-                usersApiModel = response.body()!!.items as ArrayList<UsersApiModel>
-
-                for (audit in usersApiModel) { //запихиваем данные в локальную БД UsersModel
-
-                    UsersModel(
-                        audit.id,
-                        audit.avatarUrl,
-                        audit.firstName,
-                        audit.lastName,
-                        audit.userTag,
-                        audit.department,
-                        audit.position,
-                        audit.birthday,
-                        audit.phone
-                    ).let {
-                        usersDataSource.insert(
-                            it
-                        )
-                    }
-
+                if (response.isSuccessful) {
                     Toast.makeText(
                         context,
                         "Секундочку, гружусь...",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
+
+                    var usersApiModel: ArrayList<UsersApiModel>? = null
+                    usersApiModel?.clear()
+                    usersApiModel = response.body()?.items as ArrayList<UsersApiModel>
+                    for (audit in usersApiModel) {
+                        UsersModel(
+                            audit.id,
+                            audit.avatarUrl,
+                            audit.firstName,
+                            audit.lastName,
+                            audit.userTag,
+                            audit.department,
+                            audit.position,
+                            audit.birthday,
+                            audit.phone
+                        ).let {
+                            usersDataSource.insert(
+                                it
+                            )
+                        }
+                    }
+                }
+
+                else {
+                    val fm: FragmentManager = (context as FragmentActivity).supportFragmentManager
+                    val fragment = CriticalErrorFragment()
+                    fm.beginTransaction()
+                        .replace(R.id.constraintLayout, fragment)
+                        .commit()
                 }
             }
 
@@ -72,6 +82,5 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
                 ).show()
             }
         })
-
     }
 }
