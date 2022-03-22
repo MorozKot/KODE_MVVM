@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CriticalErrorFragment">
+    tools:context=".presentation.CriticalErrorFragment">
 
     <ImageView
         android:id="@+id/nlo"
@@ -46,6 +46,7 @@
 
     <Button
         style="@style/Widget.AppCompat.Button"
+        android:id="@+id/tryAgainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/none"

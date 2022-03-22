@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData
 
 interface UsersDataSource {
 
-    fun insert(coffeeModel: UsersModel)
+    fun insert(usersModel: UsersModel)
 
     fun loadUsers(): LiveData<List<UsersModel>>
 

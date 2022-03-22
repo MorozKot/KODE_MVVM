@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="android.kode.HomeFragment"
+        android:name="android.kode.presentation.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/criticalErrorFragment"
-        android:name="android.kode.CriticalErrorFragment"
+        android:name="android.kode.presentation.CriticalErrorFragment"
         android:label="fragment_critical_error"
         tools:layout="@layout/fragment_critical_error" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/personFragment"
-        android:name="android.kode.PersonFragment"
+        android:name="android.kode.presentation.PersonFragment"
         android:label="fragment_person"
         tools:layout="@layout/fragment_person" >
         <action

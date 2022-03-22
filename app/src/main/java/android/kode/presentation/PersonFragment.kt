@@ -1,5 +1,6 @@
-package android.kode
+package android.kode.presentation
 
+import android.kode.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

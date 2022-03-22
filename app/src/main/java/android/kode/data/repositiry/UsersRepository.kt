@@ -15,12 +15,9 @@ class UsersRepository (private val usersApiDataSource: UsersApiDataSource,
                        private val usersDataSource: UsersDataSource
 ): UsersCall {
 
-    //val products = dao.loadCoffee()
-
     override fun loadCoffee(): LiveData<List<UsersModel>> {
         return usersDataSource.loadUsers()
     }
-
 
     override suspend fun startMigration(context: Context) {
         usersDataSource.clear()

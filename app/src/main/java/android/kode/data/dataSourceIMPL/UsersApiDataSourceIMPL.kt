@@ -1,8 +1,6 @@
 package android.kode.data.dataSourceIMPL
 
 import android.content.Context
-import android.kode.CriticalErrorFragment
-import android.kode.HomeFragment
 import android.kode.R
 import android.kode.data.api.ApiClient
 import android.kode.data.dataSource.UsersApiDataSource
@@ -10,15 +8,14 @@ import android.kode.data.dataSource.UsersDataSource
 import android.kode.data.models.UsersApiModel
 import android.kode.data.models.UsersListApiModel
 import android.kode.data.models.UsersModel
+import android.kode.presentation.CriticalErrorFragment
+import android.kode.presentation.HomeFragment
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 
 
 /**
@@ -63,13 +60,18 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
                             )
                         }
                     }
+                    val fm: FragmentManager = (context as FragmentActivity).supportFragmentManager
+                    val fragment = HomeFragment()
+                    fm.beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .commit()
                 }
 
                 else {
                     val fm: FragmentManager = (context as FragmentActivity).supportFragmentManager
                     val fragment = CriticalErrorFragment()
                     fm.beginTransaction()
-                        .replace(R.id.constraintLayout, fragment)
+                        .replace(R.id.fragmentContainerView, fragment)
                         .commit()
                 }
             }
@@ -77,9 +79,17 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
             override fun onFailure(call: Call<UsersListApiModel>, t: Throwable) {
                 Toast.makeText(
                     context,
-                    "Не могу обновить данные. Что-то пошло не так",
+                    "Не могу обновить данные. Проверь соединение с интернетом.",
                     Toast.LENGTH_LONG
                 ).show()
+
+                val fm: FragmentManager = (context as FragmentActivity).supportFragmentManager
+                val fragment = CriticalErrorFragment()
+                fm.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit()
+
+
             }
         })
     }

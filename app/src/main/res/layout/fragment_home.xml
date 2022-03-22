@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".presentation.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".HomeFragment">
+        tools:context=".presentation.HomeFragment">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayout"
@@ -57,7 +57,7 @@
             </androidx.appcompat.widget.SearchView>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearLayoutOtmena"
+                android:id="@+id/linearLayoutCancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">

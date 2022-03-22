@@ -9,7 +9,7 @@
     android:orientation="vertical"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:context=".PersonFragment">
+    tools:context=".presentation.PersonFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/firstLayout"

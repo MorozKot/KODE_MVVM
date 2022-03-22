@@ -12,7 +12,7 @@ import retrofit2.http.Headers
 interface ApiInterface {
     @Headers(
         "Content-Type: application/json",
-        "Prefer: code=500, example=error-500"
+        "Prefer: code=200, example=success"
     )
 
     @GET("users")
