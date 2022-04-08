@@ -13,7 +13,7 @@ class UsersUseCase (private val usersCall: UsersCall) {
 
     fun loadUsers(): LiveData<List<UsersModel>> {
 
-        return usersCall.loadCoffee()
+        return usersCall.loadUsers()
 
     }
 

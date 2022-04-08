@@ -15,9 +15,9 @@ import kotlinx.coroutines.launch
 class UsersDataSourceIMPL(private val dao: UsersDao):
     UsersDataSource {
 
-    override fun insert(coffeeModel: UsersModel) {
+    override fun insert(usersModel: UsersModel) {
         CoroutineScope(Dispatchers.IO).launch {
-            dao.insert(coffeeModel)
+            dao.insert(usersModel)
         }
     }
 

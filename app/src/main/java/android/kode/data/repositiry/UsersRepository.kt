@@ -15,7 +15,7 @@ class UsersRepository (private val usersApiDataSource: UsersApiDataSource,
                        private val usersDataSource: UsersDataSource
 ): UsersCall {
 
-    override fun loadCoffee(): LiveData<List<UsersModel>> {
+    override fun loadUsers(): LiveData<List<UsersModel>> {
         return usersDataSource.loadUsers()
     }
 

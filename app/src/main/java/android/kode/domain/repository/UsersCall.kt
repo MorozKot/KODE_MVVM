@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 
 interface UsersCall {
 
-    fun loadCoffee(): LiveData<List<UsersModel>>
+    fun loadUsers(): LiveData<List<UsersModel>>
 
     suspend fun startMigration(context: Context)
 
