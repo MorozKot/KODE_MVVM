@@ -1,7 +1,7 @@
-package android.kode.presentation.Tabs
+package android.kode.presentation
 
 import android.kode.R
-import android.kode.data.models.UsersModel
+import android.kode.domain.models.UserModel
 import android.kode.databinding.UserItemBinding
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,18 +10,16 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  *@author Moroz V.A. on 17.03.2022
  **/
 
-class UsersFilterAdapter(private var list: ArrayList<UsersModel>) :
+class UsersFilterAdapter(private var list: ArrayList<UserModel>) :
     RecyclerView.Adapter<UsersFilterAdapter.UsersFilterHolder>(), Filterable {
 
-    var filterList: ArrayList<UsersModel>
+    var filterList: ArrayList<UserModel>
 
     init {
         this.filterList = list
@@ -38,31 +36,31 @@ class UsersFilterAdapter(private var list: ArrayList<UsersModel>) :
         return filterList.size
     }
 
-    override fun onBindViewHolder(holder: UsersFilterAdapter.UsersFilterHolder, position: Int) {
+    override fun onBindViewHolder(holder: UsersFilterHolder, position: Int) {
         holder.bind(filterList[position])
     }
 
     class UsersFilterHolder(val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(usersModel: UsersModel) {
+        fun bind(userModel: UserModel) {
 
             val getImage = binding.avatarUrlItem
 
-            getImage.load(usersModel.avatarUrl) {
+            getImage.load(userModel.avatarUrl) {
                 crossfade(true)
                 placeholder(R.drawable.ic_goose)
                 transformations(CircleCropTransformation())
             }
 
-            binding.nameItem.text = usersModel.firstName + " " + usersModel.lastName
-            binding.userTagItem.text = usersModel.userTag.lowercase()
-            binding.departmentItem.text = usersModel.department
+            binding.nameItem.text = userModel.firstName + " " + userModel.lastName
+            binding.userTagItem.text = userModel.userTag.lowercase()
+            binding.departmentItem.text = userModel.department
         }
     }
 
-    fun setList(usersList: List<UsersModel>) {
+    fun setList(userList: List<UserModel>) {
         filterList.clear()
-        filterList.addAll(usersList)
+        filterList.addAll(userList)
     }
 
     override fun getFilter(): Filter {
@@ -73,7 +71,7 @@ class UsersFilterAdapter(private var list: ArrayList<UsersModel>) :
                 if (charSearch.isBlank() or charSearch.isEmpty()) {
                     filterList = list
                 } else {
-                    val resultList = ArrayList<UsersModel>()
+                    val resultList = ArrayList<UserModel>()
 
                     for (row in list) {
 
@@ -98,7 +96,7 @@ class UsersFilterAdapter(private var list: ArrayList<UsersModel>) :
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filterList = results!!.values as ArrayList<UsersModel>
+                filterList = results!!.values as ArrayList<UserModel>
                 notifyDataSetChanged()
             }
         }

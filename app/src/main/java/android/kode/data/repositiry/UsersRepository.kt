@@ -1,10 +1,12 @@
 package android.kode.data.repositiry
 
-import android.content.Context
+import android.content.ContentValues
 import android.kode.data.dataSource.UsersApiDataSource
 import android.kode.data.dataSource.UsersDataSource
-import android.kode.data.models.UsersModel
+import android.kode.domain.models.UserModel
+import android.kode.presentation.GetUsersResult
 import android.kode.domain.repository.UsersCall
+import android.util.Log
 import androidx.lifecycle.LiveData
 
 /**
@@ -15,13 +17,19 @@ class UsersRepository (private val usersApiDataSource: UsersApiDataSource,
                        private val usersDataSource: UsersDataSource
 ): UsersCall {
 
-    override fun loadUsers(): LiveData<List<UsersModel>> {
-        return usersDataSource.loadUsers()
+    override suspend fun getUsers(): GetUsersResult {
+
+        Log.d(ContentValues.TAG, "UsersRepository getUsers")
+
+        return usersApiDataSource.getUsers()
+
     }
 
-    override suspend fun startMigration(context: Context) {
-        usersDataSource.clear()
-        usersApiDataSource.startMigration(context)
+    override fun getLocalUsers(): LiveData<List<UserModel>> {
+
+        Log.d(ContentValues.TAG, "UsersRepository getLocalUsers")
+
+        return usersDataSource.getLocalUsers()
     }
 }
 

@@ -1,11 +1,11 @@
-package android.kode.data.models
+package android.kode.domain.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "users_data_table")
-class UsersModel (
+class UserModel (
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "user_id")

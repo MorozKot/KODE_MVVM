@@ -1,20 +1,59 @@
 package android.kode.presentation.viewModels
 
-import android.content.Context
+import android.content.ContentValues
+import android.kode.presentation.GetUsersResult
 import android.kode.domain.useCase.UsersUseCase
+import android.kode.presentation.ScreenStates
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 /**
  *@author Moroz V.A. on 13.03.2022
  **/
 
-class UsersViewModel (private val usersUseCase: UsersUseCase): ViewModel() {
+class UsersViewModel(private val usersUseCase: UsersUseCase) : ViewModel() {
 
-    val loadUsers = usersUseCase.loadUsers()
+    private val _screenLoadingState: MutableStateFlow<ScreenStates> = MutableStateFlow(ScreenStates.CriticalError)
+    val screenLoadingState: StateFlow<ScreenStates>
+        get() = _screenLoadingState.asStateFlow()
 
-    fun migration(context: Context) = viewModelScope.launch {
-        usersUseCase.startMigration(context)
+
+
+    fun getUsers() = viewModelScope.launch {
+
+        val getUsers = usersUseCase.startGetUsers()
+
+        Log.d(ContentValues.TAG, "UsersViewModel getUsers")
+
+        when (usersUseCase.startGetUsers()) {
+
+            is GetUsersResult.Success -> {
+                Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.Success")
+            _screenLoadingState.emit(ScreenStates.Success)
+            }
+
+            is GetUsersResult.ConnectionError -> {
+                Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.ConnectionError")
+             _screenLoadingState.emit(ScreenStates.CriticalError)
+            }
+
+            is GetUsersResult.ServerError -> {
+                Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.ServerError")
+                _screenLoadingState.emit(ScreenStates.CriticalError)
+            }
+
+            is GetUsersResult.EnqueueError -> {
+                Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.EnqueueError")
+                _screenLoadingState.emit(ScreenStates.CriticalError)
+            }
+        }
     }
+
+    val getLocalUsers = usersUseCase.getLocalUsers()
+
 }

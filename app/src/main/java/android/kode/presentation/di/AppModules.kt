@@ -2,8 +2,8 @@ package android.kode.presentation.di
 
 import android.kode.data.dataSource.UsersApiDataSource
 import android.kode.data.dataSource.UsersDataSource
-import android.kode.data.dataSourceIMPL.UsersApiDataSourceIMPL
-import android.kode.data.dataSourceIMPL.UsersDataSourceIMPL
+import android.kode.data.dataSourceImpl.UsersApiDataSourceImpl
+import android.kode.data.dataSourceImpl.UsersDataSourceImpl
 import android.kode.data.localDB.LocalDB
 import android.kode.data.repositiry.UsersRepository
 import android.kode.domain.repository.UsersCall
@@ -29,13 +29,13 @@ val usersModule = module{
 
 
     single<UsersDataSource> {
-        UsersDataSourceIMPL(
+        UsersDataSourceImpl(
             get()
         )
     }
 
     single<UsersApiDataSource> {
-        UsersApiDataSourceIMPL(
+        UsersApiDataSourceImpl(
             get()
         )
     }

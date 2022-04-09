@@ -1,6 +1,8 @@
 package android.kode.data.dataSource
 
-import android.kode.data.models.UsersModel
+import android.content.ContentValues
+import android.kode.domain.models.UserModel
+import android.util.Log
 import androidx.lifecycle.LiveData
 
 /**
@@ -9,9 +11,11 @@ import androidx.lifecycle.LiveData
 
 interface UsersDataSource {
 
-    fun insert(usersModel: UsersModel)
+    fun insert(userModel: UserModel)
 
-    fun loadUsers(): LiveData<List<UsersModel>>
+    fun getLocalUsers(): LiveData<List<UserModel>>
 
-    suspend fun clear()
+    fun log() {
+        Log.d(ContentValues.TAG, "UsersDataSource log")}
+
 }

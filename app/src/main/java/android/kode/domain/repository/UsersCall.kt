@@ -1,13 +1,13 @@
 package android.kode.domain.repository
 
-import android.content.Context
-import android.kode.data.models.UsersModel
+import android.kode.domain.models.UserModel
+import android.kode.presentation.GetUsersResult
 import androidx.lifecycle.LiveData
 
 interface UsersCall {
 
-    fun loadUsers(): LiveData<List<UsersModel>>
+    suspend fun getUsers(): GetUsersResult
 
-    suspend fun startMigration(context: Context)
+    fun getLocalUsers(): LiveData<List<UserModel>>
 
 }
