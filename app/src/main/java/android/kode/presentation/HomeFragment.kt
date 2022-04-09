@@ -1,13 +1,16 @@
 package android.kode.presentation
 
+import android.content.ContentValues
 import android.content.res.ColorStateList
 import android.kode.R
 import android.kode.data.models.UsersModel
 import android.kode.databinding.FragmentHomeBinding
+import android.kode.domain.repository.GetUsersResult
 import android.kode.presentation.Tabs.UsersFilterAdapter
 import android.kode.presentation.viewModels.UsersViewModel
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +18,13 @@ import android.view.inputmethod.EditorInfo
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -40,6 +48,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         searchView = binding.searchView
         searchView?.imeOptions = EditorInfo.IME_ACTION_DONE
+
+        usersViewModel.getUsers()
+
+        observeViewModelFields(usersViewModel)
 
         binding.cancelButton.setOnClickListener {
 
@@ -66,17 +78,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         return binding.root
     }
 
-    private fun initRecyclerUsers() {
+    private fun observeViewModelFields(usersViewModel: UsersViewModel) {
 
-        binding.recyclerViewUsers.layoutManager =
-            LinearLayoutManager(context)
-        usersFilterAdapter = UsersFilterAdapter(arrayList)
-        binding.recyclerViewUsers.adapter = usersFilterAdapter
+        lifecycleScope.launch {
+            usersViewModel.screenLoadingState.collect { result ->
+                when (result) {
+
+                    ScreenStates.Success -> {
+                        Log.d(ContentValues.TAG, "HomeFragment   ScreenStates.Success")
+                    }
+
+                    ScreenStates.CriticalError -> {
+                        Log.d(ContentValues.TAG, "HomeFragment  ScreenStates.CriticalError")
+                        findNavController()
+                            .navigate(R.id.action_homeFragment_to_criticalErrorFragment)
+
+                    }
+                }
+            }
+        }
     }
 
     private fun loadUsers() {
 
         usersViewModel.loadUsers.observe(viewLifecycleOwner, Observer {
+
             usersFilterAdapter?.setList(it)
 
             searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -89,8 +115,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 override fun onQueryTextChange(newText: String?): Boolean {
                     usersFilterAdapter?.filter?.filter(newText)
 
-                    binding.searchButton.backgroundTintList = ColorStateList.valueOf(resources.getColor(
-                        R.color.darkText, context?.theme))
+                    binding.searchButton.backgroundTintList = ColorStateList.valueOf(
+                        resources.getColor(
+                            R.color.darkText, context?.theme
+                        )
+                    )
 
                     binding.filterButton.visibility = View.GONE
 
@@ -104,5 +133,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             usersFilterAdapter?.notifyDataSetChanged()
         })
+    }
+
+    private fun initRecyclerUsers() {
+
+        binding.recyclerViewUsers.layoutManager =
+            LinearLayoutManager(context)
+        usersFilterAdapter = UsersFilterAdapter(arrayList)
+        binding.recyclerViewUsers.adapter = usersFilterAdapter
     }
 }

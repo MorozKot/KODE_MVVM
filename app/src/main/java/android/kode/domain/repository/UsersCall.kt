@@ -1,13 +1,19 @@
 package android.kode.domain.repository
 
+import android.content.ContentValues
 import android.content.Context
 import android.kode.data.models.UsersModel
+import android.util.Log
 import androidx.lifecycle.LiveData
 
 interface UsersCall {
 
+    suspend fun getUsers(): GetUsersResult
+
     fun loadUsers(): LiveData<List<UsersModel>>
 
-    suspend fun startMigration(context: Context)
+    fun log() {
+        Log.d(ContentValues.TAG, "UsersCall")
+    }
 
 }

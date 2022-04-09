@@ -1,8 +1,10 @@
 package android.kode.data.dataSourceIMPL
 
+import android.content.ContentValues
 import android.kode.data.dataSource.UsersDataSource
 import android.kode.data.localDB.UsersDao
 import android.kode.data.models.UsersModel
+import android.util.Log
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +22,9 @@ class UsersDataSourceIMPL(private val dao: UsersDao):
             dao.insert(usersModel)
         }
     }
+
+    override fun log() {
+        Log.d(ContentValues.TAG, "UsersDataSourceIMPL")}
 
     override fun loadUsers(): LiveData<List<UsersModel>> {
         return dao.loadUsers()
