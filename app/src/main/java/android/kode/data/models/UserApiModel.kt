@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  *@author Moroz V.A. on 06.03.2022
  **/
 
-data class UsersApiModel(
+data class UserApiModel(
     @SerializedName("id") @Expose
     val id: String,
     @SerializedName("avatarUrl") @Expose

@@ -1,14 +1,13 @@
-package android.kode.data.dataSourceIMPL
+package android.kode.data.dataSourceImpl
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.kode.data.api.ApiClient
 import android.kode.data.dataSource.UsersApiDataSource
 import android.kode.data.dataSource.UsersDataSource
-import android.kode.data.models.UsersApiModel
+import android.kode.data.models.UserApiModel
 import android.kode.data.models.UsersListApiModel
-import android.kode.data.models.UsersModel
-import android.kode.domain.repository.GetUsersResult
+import android.kode.domain.models.UserModel
+import android.kode.presentation.GetUsersResult
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,13 +18,13 @@ import retrofit2.Response
  *@author Moroz V.A. on 06.03.2022
  **/
 
-class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
+class UsersApiDataSourceImpl(private val usersDataSource: UsersDataSource) :
     UsersApiDataSource {
 
     var result: GetUsersResult =
         GetUsersResult.EnqueueError("ApiClient.instance?.api?.getUsers not working")
 
-    override suspend fun getUsers(context: Context): GetUsersResult {
+    override suspend fun getUsers(): GetUsersResult {
 
         val call = ApiClient.instance?.api?.getUsers()
 
@@ -36,11 +35,12 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
             ) {
                 when {
                     response.isSuccessful -> {
-                        var usersApiModel: ArrayList<UsersApiModel>? = null
-                        usersApiModel?.clear()
-                        usersApiModel = response.body()?.items as ArrayList<UsersApiModel>
-                        for (audit in usersApiModel) {
-                            UsersModel(
+                        val userApiModel: ArrayList<UserApiModel>
+
+                        userApiModel = response.body()?.items as ArrayList<UserApiModel>
+
+                        for (audit in userApiModel) {
+                            UserModel(
                                 audit.id,
                                 audit.avatarUrl,
                                 audit.firstName,

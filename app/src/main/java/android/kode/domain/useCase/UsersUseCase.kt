@@ -1,9 +1,8 @@
 package android.kode.domain.useCase
 
 import android.content.ContentValues.TAG
-import android.content.Context
-import android.kode.data.models.UsersModel
-import android.kode.domain.repository.GetUsersResult
+import android.kode.domain.models.UserModel
+import android.kode.presentation.GetUsersResult
 import android.kode.domain.repository.UsersCall
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -14,16 +13,16 @@ import androidx.lifecycle.LiveData
 
 class UsersUseCase (private val usersCall: UsersCall) {
 
-    suspend fun start(context: Context): GetUsersResult {
+    suspend fun startGetUsers(): GetUsersResult {
 
-        Log.d(TAG, "UsersUseCase start")
+        Log.d(TAG, "UsersUseCase startGetUsers")
 
-        return  usersCall.getUsers(context)}
+        return  usersCall.getUsers()}
 
-    fun loadUsers(): LiveData<List<UsersModel>> {
+    fun getLocalUsers(): LiveData<List<UserModel>> {
 
-        Log.d(TAG, "UsersUseCase loadUsers")
+        Log.d(TAG, "UsersUseCase getLocalUsers")
 
-        return usersCall.loadUsers()
+        return usersCall.getLocalUsers()
     }
 }

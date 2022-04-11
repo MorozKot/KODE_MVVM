@@ -1,4 +1,4 @@
-package android.kode.domain.repository
+package android.kode.presentation
 
 sealed class GetUsersResult(open val error: String? = null) {
     data class Success(override val error: String? = null) : GetUsersResult(error = error)

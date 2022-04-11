@@ -1,8 +1,7 @@
 package android.kode.data.dataSource
 
 import android.content.ContentValues
-import android.content.Context
-import android.kode.domain.repository.GetUsersResult
+import android.kode.presentation.GetUsersResult
 import android.util.Log
 
 /**
@@ -11,7 +10,7 @@ import android.util.Log
 
 interface UsersApiDataSource {
 
-    suspend fun getUsers(context: Context) : GetUsersResult
+    suspend fun getUsers() : GetUsersResult
 
     fun log() {
         Log.d(ContentValues.TAG, "UsersApiDataSource")

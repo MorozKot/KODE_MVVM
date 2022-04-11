@@ -1,8 +1,10 @@
 package android.kode.presentation
 
 
+import android.content.ContentValues
 import android.kode.databinding.ActivityMainBinding
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -14,5 +16,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Log.d(ContentValues.TAG, "MainActivity")
     }
 }

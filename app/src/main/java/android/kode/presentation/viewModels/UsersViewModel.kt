@@ -1,8 +1,7 @@
 package android.kode.presentation.viewModels
 
 import android.content.ContentValues
-import android.content.Context
-import android.kode.domain.repository.GetUsersResult
+import android.kode.presentation.GetUsersResult
 import android.kode.domain.useCase.UsersUseCase
 import android.kode.presentation.ScreenStates
 import android.util.Log
@@ -23,23 +22,31 @@ class UsersViewModel(private val usersUseCase: UsersUseCase) : ViewModel() {
     val screenLoadingState: StateFlow<ScreenStates>
         get() = _screenLoadingState.asStateFlow()
 
-    fun getUsers(context: Context) = viewModelScope.launch {
+
+
+    fun getUsers() = viewModelScope.launch {
+
+        val getUsers = usersUseCase.startGetUsers()
 
         Log.d(ContentValues.TAG, "UsersViewModel getUsers")
 
-        when (usersUseCase.start(context)) {
+        when (usersUseCase.startGetUsers()) {
+
             is GetUsersResult.Success -> {
                 Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.Success")
             _screenLoadingState.emit(ScreenStates.Success)
             }
+
             is GetUsersResult.ConnectionError -> {
                 Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.ConnectionError")
              _screenLoadingState.emit(ScreenStates.CriticalError)
             }
+
             is GetUsersResult.ServerError -> {
                 Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.ServerError")
                 _screenLoadingState.emit(ScreenStates.CriticalError)
             }
+
             is GetUsersResult.EnqueueError -> {
                 Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.EnqueueError")
                 _screenLoadingState.emit(ScreenStates.CriticalError)
@@ -47,6 +54,6 @@ class UsersViewModel(private val usersUseCase: UsersUseCase) : ViewModel() {
         }
     }
 
-    val loadUsers = usersUseCase.loadUsers()
+    val getLocalUsers = usersUseCase.getLocalUsers()
 
 }
