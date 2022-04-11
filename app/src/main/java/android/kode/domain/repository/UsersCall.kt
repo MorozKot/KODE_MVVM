@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData
 
 interface UsersCall {
 
-    suspend fun getUsers(): GetUsersResult
+    suspend fun getUsers(context: Context): GetUsersResult
 
     fun loadUsers(): LiveData<List<UsersModel>>
 

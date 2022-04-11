@@ -18,9 +18,18 @@ class UsersRepository (private val usersApiDataSource: UsersApiDataSource,
                        private val usersDataSource: UsersDataSource
 ): UsersCall {
 
-    override suspend fun getUsers(): GetUsersResult = usersApiDataSource.getUsers()
+    override suspend fun getUsers(context: Context): GetUsersResult {
+
+        Log.d(ContentValues.TAG, "UsersRepository getUsers")
+
+        usersDataSource.clear()
+        return usersApiDataSource.getUsers(context)
+    }
 
     override fun loadUsers(): LiveData<List<UsersModel>> {
+
+        Log.d(ContentValues.TAG, "UsersRepository loadUsers")
+
         return usersDataSource.loadUsers()
     }
 

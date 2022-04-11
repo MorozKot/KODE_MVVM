@@ -10,9 +10,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  *@author Moroz V.A. on 17.03.2022

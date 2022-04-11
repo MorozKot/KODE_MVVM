@@ -1,6 +1,7 @@
 package android.kode.data.dataSourceIMPL
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.kode.data.api.ApiClient
 import android.kode.data.dataSource.UsersApiDataSource
 import android.kode.data.dataSource.UsersDataSource
@@ -24,7 +25,7 @@ class UsersApiDataSourceIMPL(private val usersDataSource: UsersDataSource) :
     var result: GetUsersResult =
         GetUsersResult.EnqueueError("ApiClient.instance?.api?.getUsers not working")
 
-    override suspend fun getUsers(): GetUsersResult {
+    override suspend fun getUsers(context: Context): GetUsersResult {
 
         val call = ApiClient.instance?.api?.getUsers()
 

@@ -2,10 +2,8 @@ package android.kode.presentation
 
 
 import android.kode.databinding.ActivityMainBinding
-import android.kode.presentation.viewModels.UsersViewModel
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 

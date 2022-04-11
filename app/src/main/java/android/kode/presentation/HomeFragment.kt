@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.kode.R
 import android.kode.data.models.UsersModel
 import android.kode.databinding.FragmentHomeBinding
-import android.kode.domain.repository.GetUsersResult
 import android.kode.presentation.Tabs.UsersFilterAdapter
 import android.kode.presentation.viewModels.UsersViewModel
 import android.os.Build
@@ -18,15 +17,12 @@ import android.view.inputmethod.EditorInfo
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -49,7 +45,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         searchView = binding.searchView
         searchView?.imeOptions = EditorInfo.IME_ACTION_DONE
 
-        usersViewModel.getUsers()
+        context?.let { usersViewModel.getUsers(it) }
 
         observeViewModelFields(usersViewModel)
 

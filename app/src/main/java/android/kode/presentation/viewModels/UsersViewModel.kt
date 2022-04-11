@@ -1,12 +1,9 @@
 package android.kode.presentation.viewModels
 
-import android.app.ProgressDialog.show
 import android.content.ContentValues
 import android.content.Context
-import android.kode.data.models.UsersModel
 import android.kode.domain.repository.GetUsersResult
 import android.kode.domain.useCase.UsersUseCase
-import android.kode.presentation.HomeFragment
 import android.kode.presentation.ScreenStates
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -22,19 +19,15 @@ import kotlinx.coroutines.launch
 
 class UsersViewModel(private val usersUseCase: UsersUseCase) : ViewModel() {
 
-    private val _screenLoadingState: MutableStateFlow<ScreenStates> = MutableStateFlow(ScreenStates.Success)
+    private val _screenLoadingState: MutableStateFlow<ScreenStates> = MutableStateFlow(ScreenStates.CriticalError)
     val screenLoadingState: StateFlow<ScreenStates>
         get() = _screenLoadingState.asStateFlow()
 
-    fun log() {
-        Log.d(ContentValues.TAG, "UsersViewModel")
-    }
-
-    fun getUsers() = viewModelScope.launch {
+    fun getUsers(context: Context) = viewModelScope.launch {
 
         Log.d(ContentValues.TAG, "UsersViewModel getUsers")
 
-        when (usersUseCase.start()) {
+        when (usersUseCase.start(context)) {
             is GetUsersResult.Success -> {
                 Log.d(ContentValues.TAG, "UsersViewModel GetUsersResult.Success")
             _screenLoadingState.emit(ScreenStates.Success)

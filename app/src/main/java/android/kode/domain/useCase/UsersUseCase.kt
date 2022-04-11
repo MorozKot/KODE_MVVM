@@ -1,6 +1,5 @@
 package android.kode.domain.useCase
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.kode.data.models.UsersModel
@@ -15,11 +14,11 @@ import androidx.lifecycle.LiveData
 
 class UsersUseCase (private val usersCall: UsersCall) {
 
-    fun log() {
-        Log.d(TAG, "UsersUseCase")
-    }
+    suspend fun start(context: Context): GetUsersResult {
 
-    suspend fun start(): GetUsersResult = usersCall.getUsers()
+        Log.d(TAG, "UsersUseCase start")
+
+        return  usersCall.getUsers(context)}
 
     fun loadUsers(): LiveData<List<UsersModel>> {
 
