@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -51,9 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         searchView?.imeOptions = EditorInfo.IME_ACTION_DONE
 
 
-
         if(usersList.isEmpty())usersViewModel.getUsers()
-
 
 
         observeViewModelFields()
@@ -70,7 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         lifecycleScope.launch {
 
-            usersViewModel.screenLoadingState.collect { result ->
+            usersViewModel.screenLoadingState.addObserver { result ->
                 when (result) {
 
                     ScreenStates.Success -> {
@@ -82,6 +81,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                     ScreenStates.CriticalError -> {
                         Log.d(ContentValues.TAG, "HomeFragment  ScreenStates.CriticalError")
+
                         findNavController()
                             .navigate(R.id.action_homeFragment_to_criticalErrorFragment)
 
